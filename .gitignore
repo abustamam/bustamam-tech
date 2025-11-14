@@ -4,10 +4,12 @@ yarn.lock
 
 .DS_Store
 .cache
+.tanstack/tmp
 .env
 .vercel
 .output
 /build/
+/dist/
 /api/
 /server/build
 /public/build# Sentry Config File

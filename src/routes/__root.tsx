@@ -15,7 +15,7 @@ import { NotFound } from '~/components/NotFound'
 import appCss from '~/styles/app.css?url'
 import { seo } from '~/utils/seo'
 import { Button } from '~/components/ui/button'
-import { Home as HomeIcon, Code2, Users, FileText } from 'lucide-react'
+import { Home as HomeIcon, Code2, Briefcase, FolderKanban } from 'lucide-react'
 import { ThemeProvider } from '~/components/theme-provider'
 import { ThemeToggle } from '~/components/theme-toggle'
 
@@ -123,24 +123,24 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                   Home
                 </Link>
                 <Link
-                  to="/posts"
+                  to="/services"
                   activeProps={{
                     className: 'bg-accent text-accent-foreground',
                   }}
                   className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
                 >
-                  <FileText className="mr-2 h-4 w-4" />
-                  Posts
+                  <Briefcase className="mr-2 h-4 w-4" />
+                  Services
                 </Link>
                 <Link
-                  to="/users"
+                  to="/projects"
                   activeProps={{
                     className: 'bg-accent text-accent-foreground',
                   }}
                   className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
                 >
-                  <Users className="mr-2 h-4 w-4" />
-                  Users
+                  <FolderKanban className="mr-2 h-4 w-4" />
+                  Projects
                 </Link>
               </div>
 
