@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { Button } from '~/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
 import { TextEffect } from '~/components/ui/text-effect'
@@ -24,6 +24,12 @@ const ENTRY_VARIANTS = {
 }
 
 function Home() {
+  const contactRef = React.useRef<HTMLElement>(null)
+
+  const scrollToContact = () => {
+    contactRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
       {/* Hero Section */}
@@ -79,7 +85,7 @@ function Home() {
                   ease: 'easeOut',
                 }}
               >
-                <Button size="lg" className="group">
+                <Button size="lg" className="group" onClick={scrollToContact}>
                   <Rocket className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   Start Your Project
                 </Button>
@@ -94,10 +100,12 @@ function Home() {
                   ease: 'easeOut',
                 }}
               >
-                <Button size="lg" variant="outline" className="group">
-                  <Code className="mr-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
-                  Our Services
-                </Button>
+                <Link to="/services">
+                  <Button size="lg" variant="outline" className="group">
+                    <Code className="mr-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
+                    Our Services
+                  </Button>
+                </Link>
               </motion.div>
             </div>
           </div>
@@ -214,7 +222,7 @@ function Home() {
       </section>
 
       {/* Contact Section */}
-      <section className="container mx-auto px-4 py-20">
+      <section id="contact" ref={contactRef} className="container mx-auto px-4 py-20">
         <div className="max-w-2xl mx-auto text-center">
           <motion.h2
             className="text-3xl md:text-4xl font-bold mb-8"
@@ -253,10 +261,12 @@ function Home() {
                 ease: 'easeOut',
               }}
             >
-              <Button variant="outline" size="lg" className="group">
-                <Mail className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
-                Email
-              </Button>
+              <a href="mailto:admin@bustamam.tech">
+                <Button variant="outline" size="lg" className="group">
+                  <Mail className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
+                  Email
+                </Button>
+              </a>
             </motion.div>
             <motion.div
               variants={ENTRY_VARIANTS}
@@ -268,10 +278,12 @@ function Home() {
                 ease: 'easeOut',
               }}
             >
-              <Button variant="outline" size="lg" className="group">
-                <Github className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
-                GitHub
-              </Button>
+              <a href="https://github.com/abustamam" target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" size="lg" className="group">
+                  <Github className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
+                  GitHub
+                </Button>
+              </a>
             </motion.div>
             <motion.div
               variants={ENTRY_VARIANTS}
@@ -283,10 +295,12 @@ function Home() {
                 ease: 'easeOut',
               }}
             >
-              <Button variant="outline" size="lg" className="group">
-                <Linkedin className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
-                LinkedIn
-              </Button>
+              <a href="https://linkedin.com/in/rbustamam" target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" size="lg" className="group">
+                  <Linkedin className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
+                  LinkedIn
+                </Button>
+              </a>
             </motion.div>
           </div>
         </div>
