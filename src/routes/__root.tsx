@@ -14,6 +14,10 @@ import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary'
 import { NotFound } from '~/components/NotFound'
 import appCss from '~/styles/app.css?url'
 import { seo } from '~/utils/seo'
+import { Button } from '~/components/ui/button'
+import { Home as HomeIcon, Code2, Users, FileText } from 'lucide-react'
+import { ThemeProvider } from '~/components/theme-provider'
+import { ThemeToggle } from '~/components/theme-toggle'
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
@@ -28,9 +32,8 @@ export const Route = createRootRouteWithContext<{
         content: 'width=device-width, initial-scale=1',
       },
       ...seo({
-        title:
-          'TanStack Start | Type-Safe, Client-First, Full-Stack React Framework',
-        description: `TanStack Start is a type-safe, client-first, full-stack React framework. `,
+        title: 'Bustamam Technology | We Help Startups Start Up',
+        description: `Bustamam Technology - Consulting practice helping startups build their technical foundation. From MVP to scale, we're your technical partner.`,
       }),
     ],
     links: [
@@ -69,9 +72,11 @@ export const Route = createRootRouteWithContext<{
 
 function RootComponent() {
   return (
-    <RootDocument>
-      <Outlet />
-    </RootDocument>
+    <ThemeProvider defaultTheme="system" storageKey="theme">
+      <RootDocument>
+        <Outlet />
+      </RootDocument>
+    </ThemeProvider>
   )
 }
 
@@ -79,63 +84,82 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   return (
     <html>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const theme = localStorage.getItem('theme') || 'system';
+                const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                const resolvedTheme = theme === 'system' ? systemTheme : theme;
+                document.documentElement.classList.add(resolvedTheme);
+              })();
+            `,
+          }}
+        />
         <HeadContent />
       </head>
-      <body>
-        <div className="p-2 flex gap-2 text-lg">
-          <Link
-            to="/"
-            activeProps={{
-              className: 'font-bold',
-            }}
-            activeOptions={{ exact: true }}
-          >
-            Home
-          </Link>{' '}
-          <Link
-            to="/posts"
-            activeProps={{
-              className: 'font-bold',
-            }}
-          >
-            Posts
-          </Link>{' '}
-          <Link
-            to="/users"
-            activeProps={{
-              className: 'font-bold',
-            }}
-          >
-            Users
-          </Link>{' '}
-          <Link
-            to="/route-a"
-            activeProps={{
-              className: 'font-bold',
-            }}
-          >
-            Pathless Layout
-          </Link>{' '}
-          <Link
-            to="/deferred"
-            activeProps={{
-              className: 'font-bold',
-            }}
-          >
-            Deferred
-          </Link>{' '}
-          <Link
-            // @ts-expect-error
-            to="/this-route-does-not-exist"
-            activeProps={{
-              className: 'font-bold',
-            }}
-          >
-            This Route Does Not Exist
-          </Link>
-        </div>
-        <hr />
-        {children}
+      <body className="antialiased">
+        <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="container mx-auto px-4">
+            <div className="flex h-16 items-center justify-between">
+              <Link
+                to="/"
+                className="flex items-center space-x-2 font-bold text-xl hover:text-primary transition-colors"
+              >
+                <Code2 className="h-5 w-5" />
+                <span>Bustamam Tech</span>
+              </Link>
+              
+              <div className="hidden md:flex items-center space-x-1">
+                <Link
+                  to="/"
+                  activeProps={{
+                    className: 'bg-accent text-accent-foreground',
+                  }}
+                  activeOptions={{ exact: true }}
+                  className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                >
+                  <HomeIcon className="mr-2 h-4 w-4" />
+                  Home
+                </Link>
+                <Link
+                  to="/posts"
+                  activeProps={{
+                    className: 'bg-accent text-accent-foreground',
+                  }}
+                  className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                >
+                  <FileText className="mr-2 h-4 w-4" />
+                  Posts
+                </Link>
+                <Link
+                  to="/users"
+                  activeProps={{
+                    className: 'bg-accent text-accent-foreground',
+                  }}
+                  className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                >
+                  <Users className="mr-2 h-4 w-4" />
+                  Users
+                </Link>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <ThemeToggle />
+                <a href="mailto:contact@example.com">
+                  <Button variant="outline" size="sm">
+                    Contact
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        
+        <main className="min-h-screen">
+          {children}
+        </main>
+        
         <TanStackRouterDevtools position="bottom-right" />
         <ReactQueryDevtools buttonPosition="bottom-left" />
         <Scripts />

@@ -1,0 +1,21 @@
+---
+alwaysApply: true
+---
+
+# Cursor Rules Guidelines
+
+## Adding Cursor Rules
+
+When adding new cursor rules to this project:
+
+1. **Location**: All cursor rules files must be placed in the `.cursor/rules/` directory
+2. **File Format**: Use `.mdc` extension for markdown-based cursor rules
+3. **Frontmatter**: Include frontmatter with metadata such as `alwaysApply: true` if the rule should always be applied
+4. **Naming**: Use descriptive, kebab-case names for rule files (e.g., `component-guidelines.mdc`, `api-patterns.mdc`)
+
+## Best Practices
+
+- Keep rules focused and specific to avoid conflicts
+- Use clear, actionable language
+- Reference existing code patterns when possible
+- Update this file if the rules structure changes
