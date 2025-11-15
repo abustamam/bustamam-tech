@@ -117,7 +117,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
               <div className="flex items-center space-x-2">
                 <ThemeToggle />
-                <a href="mailto:contact@example.com">
+                <a href="mailto:admin@bustamam.tech">
                   <Button variant="outline" size="sm">
                     Contact
                   </Button>

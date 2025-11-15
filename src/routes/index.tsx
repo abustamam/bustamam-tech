@@ -221,6 +221,97 @@ function Home() {
         </div>
       </section>
 
+      {/* Our Work Section */}
+      <section className="container mx-auto px-4 py-20">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold mb-12 text-center"
+            variants={ENTRY_VARIANTS}
+            initial="hidden"
+            animate="visible"
+            transition={{
+              duration: 0.5,
+              delay: 0.3,
+              ease: 'easeOut',
+            }}
+          >
+            Our Work
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              {
+                title: 'SaaS Platform MVP',
+                image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
+                description: 'Built a scalable SaaS platform from concept to launch',
+              },
+              {
+                title: 'E-Commerce Solution',
+                image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop',
+                description: 'Full-stack e-commerce platform with modern architecture',
+              },
+              {
+                title: 'Mobile App Launch',
+                image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop',
+                description: 'Cross-platform mobile application for startup',
+              },
+              {
+                title: 'Tech Stack Migration',
+                image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop',
+                description: 'Modernized legacy system with scalable architecture',
+              },
+              {
+                title: 'API Platform',
+                image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop',
+                description: 'Built robust API infrastructure for scaling startup',
+              },
+              {
+                title: 'Data Analytics Dashboard',
+                image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
+                description: 'Real-time analytics platform for data-driven decisions',
+              },
+              {
+                title: 'Cloud Infrastructure',
+                image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop',
+                description: 'Scalable cloud architecture for high-growth startup',
+              },
+              {
+                title: 'Product Redesign',
+                image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop',
+                description: 'Complete product redesign and technical overhaul',
+              },
+            ].map((project, index) => (
+              <motion.div
+                key={project.title}
+                variants={ENTRY_VARIANTS}
+                initial="hidden"
+                animate="visible"
+                transition={{
+                  duration: 0.5,
+                  delay: 0.4 + index * 0.05,
+                  ease: 'easeOut',
+                }}
+                className="group relative overflow-hidden rounded-lg aspect-[4/3] cursor-pointer"
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 z-20 flex flex-col justify-end p-6">
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-white/80 opacity-0 group-hover:opacity-100 transition-opacity">
+                    {project.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" ref={contactRef} className="container mx-auto px-4 py-20">
         <div className="max-w-2xl mx-auto text-center">
