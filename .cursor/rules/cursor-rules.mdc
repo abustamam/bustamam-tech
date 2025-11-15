@@ -6,7 +6,19 @@ alwaysApply: true
 
 **This file contains guidelines for adding cursor rules, NOT the actual rules themselves.**
 
-Actual project rules should be placed in separate `.mdc` files in this directory (e.g., `bustamam-tech-website.mdc`).
+Actual project rules should be placed in separate `.mdc` files in this directory.
+
+## Current Rule Files
+
+The project uses the following rule files:
+
+- `bustamam-tech-website.mdc` ⭐ - Core purpose, mission, goals, target audience, and technical stack (always applied)
+- `content-guidelines.mdc` - Key messaging, brand voice, and content rules (context-specific)
+- `hero-image-guidelines.mdc` - Detailed specifications for hero images (context-specific)
+- `primitive-components.mdc` ⭐ - Rules about UI primitive components (always applied - critical constraint)
+- `cursor-rules.mdc` ⭐ - This file - guidelines for managing cursor rules (always applied)
+
+⭐ = Always applied (foundational or critical)
 
 ## Adding Cursor Rules
 
@@ -14,14 +26,55 @@ When adding new cursor rules to this project:
 
 1. **Location**: All cursor rules files must be placed in the `.cursor/rules/` directory
 2. **File Format**: Use `.mdc` extension for markdown-based cursor rules
-3. **Frontmatter**: Include frontmatter with metadata such as `alwaysApply: true` if the rule should always be applied
-4. **Naming**: Use descriptive, kebab-case names for rule files (e.g., `component-guidelines.mdc`, `api-patterns.mdc`)
+3. **Frontmatter**: Include frontmatter with `alwaysApply: true` ONLY for foundational/core rules or critical constraints that must always be in context
+4. **Naming**: Use descriptive, kebab-case names for rule files (e.g., `content-guidelines.mdc`, `hero-image-guidelines.mdc`)
 5. **Content**: Put actual rules in separate files, NOT in this guidelines file
+
+## When to Use `alwaysApply: true`
+
+Use `alwaysApply: true` sparingly - only for rules that:
+
+- Provide foundational context needed for most work (e.g., core purpose, mission, technical stack)
+- Define critical constraints that prevent mistakes (e.g., "never modify primitive components")
+- Are small meta-rules that help with rule management
+
+**Do NOT** use `alwaysApply: true` for:
+
+- Specific feature guidelines (e.g., hero image specs)
+- Content rules that are only needed when writing content
+- Detailed specifications that are context-specific
+- Rules that are substantial in size (>20 lines) unless truly foundational
+
+The AI can reference non-always-apply rules when the context requires them (e.g., when working on hero images, it will reference `hero-image-guidelines.mdc`).
+
+## When to Create a New Rule File vs. Add to Existing
+
+### Create a new rule file when:
+
+- The rules are for a distinct, focused topic that doesn't fit existing files
+- The rules are substantial enough (10+ lines) to warrant their own file
+- The rules are for a specific feature or component that may grow over time
+- The rules are technical constraints or patterns that apply broadly
+
+### Add to an existing file when:
+
+- The rules naturally extend an existing topic (e.g., adding a new content guideline to `content-guidelines.mdc`)
+- The rules are small additions (1-3 items) that fit the existing file's purpose
+- The rules are closely related to the existing file's scope
+
+### Examples:
+
+- ✅ **New file**: `api-patterns.mdc` for API design patterns
+- ✅ **New file**: `testing-guidelines.mdc` for testing standards
+- ✅ **Add to existing**: New content rule → `content-guidelines.mdc`
+- ✅ **Add to existing**: New hero image spec → `hero-image-guidelines.mdc`
 
 ## Best Practices
 
 - Keep rules focused and specific to avoid conflicts
 - Use clear, actionable language
 - Reference existing code patterns when possible
-- Update this file if the rules structure changes
+- Group related rules together in the same file
+- Don't over-split - aim for 3-5 focused rule files rather than 10+ tiny ones
+- Update this file if the rules structure changes significantly
 - **DO NOT add actual project rules to this file** - create new rule files instead
