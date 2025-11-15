@@ -5,6 +5,7 @@ import {
   Outlet,
   Scripts,
   createRootRouteWithContext,
+  useRouterState,
 } from '@tanstack/react-router'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
@@ -18,6 +19,8 @@ import { Button } from '~/components/ui/button'
 import { Home as HomeIcon, Code2, Briefcase, FolderKanban } from 'lucide-react'
 import { ThemeProvider } from '~/components/theme-provider'
 import { ThemeToggle } from '~/components/theme-toggle'
+import { AnimatedBackground } from '~/components/ui/animated-background'
+import { cn } from '~/utils/cn'
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
@@ -110,39 +113,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                 <span>Bustamam Tech</span>
               </Link>
               
-              <div className="hidden md:flex items-center space-x-1">
-                <Link
-                  to="/"
-                  activeProps={{
-                    className: 'bg-accent text-accent-foreground',
-                  }}
-                  activeOptions={{ exact: true }}
-                  className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-                >
-                  <HomeIcon className="mr-2 h-4 w-4" />
-                  Home
-                </Link>
-                <Link
-                  to="/services"
-                  activeProps={{
-                    className: 'bg-accent text-accent-foreground',
-                  }}
-                  className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-                >
-                  <Briefcase className="mr-2 h-4 w-4" />
-                  Services
-                </Link>
-                <Link
-                  to="/projects"
-                  activeProps={{
-                    className: 'bg-accent text-accent-foreground',
-                  }}
-                  className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-                >
-                  <FolderKanban className="mr-2 h-4 w-4" />
-                  Projects
-                </Link>
-              </div>
+              <NavigationLinks />
 
               <div className="flex items-center space-x-2">
                 <ThemeToggle />
@@ -165,5 +136,85 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
+  )
+}
+
+function NavigationLinks() {
+  const routerState = useRouterState()
+  const currentPath = routerState.location.pathname
+
+  // Map paths to IDs for AnimatedBackground
+  const getActiveId = () => {
+    if (currentPath === '/') return 'home'
+    if (currentPath === '/services') return 'services'
+    if (currentPath === '/projects') return 'projects'
+    return null
+  }
+
+  const activeId = getActiveId()
+
+  const navItems = [
+    {
+      id: 'home',
+      to: '/',
+      icon: HomeIcon,
+      label: 'Home',
+      exact: true,
+    },
+    {
+      id: 'services',
+      to: '/services',
+      icon: Briefcase,
+      label: 'Services',
+      exact: false,
+    },
+    {
+      id: 'projects',
+      to: '/projects',
+      icon: FolderKanban,
+      label: 'Projects',
+      exact: false,
+    },
+  ]
+
+
+  return (
+    <div className="hidden md:flex items-center">
+      <div className="flex flex-row">
+        <AnimatedBackground
+          defaultValue={activeId || undefined}
+          className="rounded-lg bg-accent dark:bg-accent/80"
+          transition={{
+            type: 'spring',
+            bounce: 0.2,
+            duration: 0.3,
+          }}
+        >
+          {navItems.map((item) => {
+            const Icon = item.icon
+
+            return (
+              <Link
+                key={item.id}
+                data-id={item.id}
+                to={item.to}
+                activeOptions={{ exact: item.exact }}
+                className={cn(
+                  'inline-flex items-center justify-center px-4 py-2 text-sm font-medium transition-colors duration-100',
+                  'text-foreground/70 hover:text-foreground',
+                  'data-[checked=true]:text-accent-foreground data-[checked=true]:font-semibold'
+                )}
+              >
+                <div className="flex items-center justify-center">
+
+                <Icon className="mr-2 h-4 w-4" />
+                {item.label}
+                </div>
+              </Link>
+            )
+          })}
+        </AnimatedBackground>
+      </div>
+    </div>
   )
 }
