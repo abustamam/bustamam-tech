@@ -10,7 +10,7 @@ export interface RollingTextProps {
 export function RollingText({
   prefix,
   words,
-  interval = 1500,
+  interval = 1000,
   className = '',
 }: RollingTextProps) {
   const [currentIndex, setCurrentIndex] = React.useState(0)
@@ -70,7 +70,7 @@ export function RollingText({
   }
 
   return (
-    <span className={`inline-block ${className}`}>
+    <span className={`inline-flex items-center justify-center mb-0 ${className}`}>
       {prefix && <span>{prefix}</span>}
       <span className={`relative inline-block ${prefix ? 'ml-1' : ''}`} style={{ verticalAlign: 'baseline' }}>
         <span

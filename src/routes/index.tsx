@@ -34,7 +34,7 @@ function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-12 md:py-20">
+      <section className="container mx-auto px-4 pt-12 md:pt-20">
         <div className="max-w-4xl mx-auto">
           <div className="text-center space-y-8">
             <motion.div
@@ -63,17 +63,36 @@ function Home() {
               Bustamam Technology
             </TextEffect>
             
-            <TextEffect
-              className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto"
-              preset="blur"
-              as="p"
-              per="line"
-              delay={0.5}
-              speedReveal={0.8}
-              segmentTransition={{ duration: 0.5, ease: 'easeOut' }}
+            <motion.div
+              className="text-3xl md:text-5xl lg:text-6xl text-foreground font-bold leading-tight space-y-2 max-w-4xl mx-auto"
+              variants={ENTRY_VARIANTS}
+              initial="hidden"
+              animate="visible"
+              transition={{
+                duration: 0.5,
+                delay: 0.6,
+                ease: 'easeOut',
+              }}
             >
-              We help startups start up
-            </TextEffect>
+              <p>Your technical partner in</p>
+              
+                <RollingText
+                  prefix=""
+                  words={[
+                    'launch',
+                    'scale',
+                    'success',
+                    'growth',
+                    'profitability',
+                    'market fit',
+                    'IPO',
+                    'exit',
+                  ]}
+                  interval={1000}
+                />
+              
+              <p>and beyond.</p>
+            </motion.div>
             
             <div className="flex flex-wrap gap-4 justify-center">
               <motion.div
@@ -134,26 +153,6 @@ function Home() {
               into reality, providing full-stack development, technical strategy, and 
               product development services.
             </p>
-            <div className="text-3xl md:text-5xl lg:text-6xl text-foreground font-bold leading-tight space-y-2">
-              <p>Your technical partner in</p>
-              <p>
-                <RollingText
-                  prefix=""
-                  words={[
-                    'launch',
-                    'scale',
-                    'success',
-                    'growth',
-                    'profitability',
-                    'market fit',
-                    'IPO',
-                    'exit',
-                  ]}
-                  interval={1500}
-                />
-              </p>
-              <p>and beyond.</p>
-            </div>
           </motion.div>
         </div>
       </section>
