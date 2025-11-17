@@ -1,0 +1,111 @@
+# React Hooks Rules
+
+## Rules of Hooks - Critical Constraint
+
+**NEVER call hooks conditionally or after early returns.**
+
+### The Problem
+
+React hooks (useState, useEffect, useMemo, useCallback, etc.) must be called in the same order on every render. If you call hooks after a conditional return or inside a conditional block, you violate the Rules of Hooks.
+
+### ❌ WRONG - Hooks After Early Return
+
+```typescript
+function Component() {
+  const [state, setState] = useState(0)
+  
+  if (someCondition) {
+    return <div>Early return</div>
+  }
+  
+  // ❌ BAD: Hook called after conditional return
+  const memoized = useMemo(() => compute(), [deps])
+  
+  return <div>...</div>
+}
+```
+
+### ✅ CORRECT - All Hooks Before Any Returns
+
+```typescript
+function Component() {
+  const [state, setState] = useState(0)
+  
+  // ✅ GOOD: All hooks called before any conditional returns
+  const memoized = useMemo(() => compute(), [deps])
+  
+  if (someCondition) {
+    return <div>Early return</div>
+  }
+  
+  return <div>...</div>
+}
+```
+
+### Common Patterns to Avoid
+
+1. **Early returns before hooks:**
+   ```typescript
+   // ❌ BAD
+   if (!mounted) return null
+   const value = useMemo(...)
+   ```
+
+2. **Hooks inside conditionals:**
+   ```typescript
+   // ❌ BAD
+   if (condition) {
+     const value = useMemo(...)
+   }
+   ```
+
+3. **Hooks after guard clauses:**
+   ```typescript
+   // ❌ BAD
+   if (!data) return <Loading />
+   const processed = useMemo(() => process(data), [data])
+   ```
+
+### Best Practice
+
+**Always structure components so ALL hooks are called at the top, before any conditional logic or early returns.**
+
+```typescript
+function Component({ data, mounted }) {
+  // 1. All useState hooks
+  const [state, setState] = useState(0)
+  
+  // 2. All useMemo/useCallback hooks
+  const memoized = useMemo(() => compute(), [deps])
+  
+  // 3. All useEffect hooks
+  useEffect(() => {
+    // ...
+  }, [deps])
+  
+  // 4. THEN conditional logic and early returns
+  if (!mounted) return null
+  if (!data) return <Loading />
+  
+  // 5. Finally, the main return
+  return <div>...</div>
+}
+```
+
+### When You Need Conditional Hook Behavior
+
+If you need conditional behavior, handle it INSIDE the hook, not by conditionally calling the hook:
+
+```typescript
+// ✅ GOOD: Conditional logic inside the hook
+useEffect(() => {
+  if (!mounted) return
+  // do something
+}, [mounted])
+
+// ✅ GOOD: Early return inside useMemo
+const value = useMemo(() => {
+  if (!data) return null
+  return compute(data)
+}, [data])
+```

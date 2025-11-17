@@ -16,6 +16,7 @@ The project uses the following rule files:
 - `content-guidelines.mdc` - Key messaging, brand voice, and content rules (context-specific)
 - `hero-image-guidelines.mdc` - Detailed specifications for hero images (context-specific)
 - `primitive-components.mdc` ⭐ - Rules about UI primitive components (always applied - critical constraint)
+- `react-hooks-rules.mdc` ⭐ - Rules of Hooks: critical constraint about hook ordering (always applied - prevents bugs)
 - `cursor-rules.mdc` ⭐ - This file - guidelines for managing cursor rules (always applied)
 
 ⭐ = Always applied (foundational or critical)

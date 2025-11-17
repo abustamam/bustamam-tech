@@ -2,6 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { Button } from '~/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
 import { TextEffect } from '~/components/ui/text-effect'
+import { RollingText } from '~/components/rolling-text'
 import { Github, Linkedin, Mail, Code, Sparkles, Rocket, Target } from 'lucide-react'
 import { motion } from 'motion/react'
 import * as React from 'react'
@@ -133,9 +134,26 @@ function Home() {
               into reality, providing full-stack development, technical strategy, and 
               product development services.
             </p>
-            <p className="text-base md:text-lg text-foreground font-medium">
-              Your technical partner from idea to launch and beyond.
-            </p>
+            <div className="text-3xl md:text-5xl lg:text-6xl text-foreground font-bold leading-tight space-y-2">
+              <p>Your technical partner in</p>
+              <p>
+                <RollingText
+                  prefix=""
+                  words={[
+                    'launch',
+                    'scale',
+                    'success',
+                    'growth',
+                    'profitability',
+                    'market fit',
+                    'IPO',
+                    'exit',
+                  ]}
+                  interval={1500}
+                />
+              </p>
+              <p>and beyond.</p>
+            </div>
           </motion.div>
         </div>
       </section>
