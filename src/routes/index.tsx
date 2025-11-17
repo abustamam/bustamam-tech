@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { Button } from '~/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
 import { TextEffect } from '~/components/ui/text-effect'
-import { RollingText } from '~/components/rolling-text'
+import { TextLoop } from '~/components/ui/text-loop'
 import { Github, Linkedin, Mail, Code, Sparkles, Rocket, Target } from 'lucide-react'
 import { motion } from 'motion/react'
 import * as React from 'react'
@@ -74,23 +74,50 @@ function Home() {
                 ease: 'easeOut',
               }}
             >
-              <p>Your technical partner in</p>
-              
-                <RollingText
-                  prefix=""
-                  words={[
-                    'launch',
-                    'scale',
-                    'success',
-                    'growth',
-                    'profitability',
-                    'market fit',
-                    'IPO',
-                    'exit',
-                  ]}
-                  interval={1000}
-                />
-              
+              <p>
+                Your technical partner in{' '}
+              </p>
+              <p className="inline-flex whitespace-pre-wrap">
+                <TextLoop
+                  className="overflow-y-clip"
+                  interval={1.5}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 900,
+                    damping: 80,
+                    mass: 10,
+                  }}
+                  variants={{
+                    initial: {
+                      y: 20,
+                      rotateX: 90,
+                      opacity: 0,
+                      filter: 'blur(4px)',
+                    },
+                    animate: {
+                      y: 0,
+                      rotateX: 0,
+                      opacity: 1,
+                      filter: 'blur(0px)',
+                    },
+                    exit: {
+                      y: -20,
+                      rotateX: -90,
+                      opacity: 0,
+                      filter: 'blur(4px)',
+                    },
+                  }}
+                >
+                  <span>launch</span>
+                  <span>scale</span>
+                  <span>success</span>
+                  <span>growth</span>
+                  <span>profitability</span>
+                  <span>market fit</span>
+                  <span>IPO</span>
+                  <span>exit</span>
+                </TextLoop>
+              </p>
               <p>and beyond.</p>
             </motion.div>
             
