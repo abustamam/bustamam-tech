@@ -1,35 +1,49 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { Button } from '~/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
-import { TextEffect } from '~/components/ui/text-effect'
-import { TextLoop } from '~/components/ui/text-loop'
-import { Github, Linkedin, Mail, Code, Sparkles, Rocket, Target } from 'lucide-react'
-import { motion } from 'motion/react'
-import * as React from 'react'
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Button } from "~/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
+import { TextEffect } from "~/components/ui/text-effect";
+import { TextLoop } from "~/components/ui/text-loop";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Code,
+  Sparkles,
+  Rocket,
+  Target,
+} from "lucide-react";
+import { motion } from "motion/react";
+import * as React from "react";
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
   component: Home,
-})
+});
 
 const ENTRY_VARIANTS = {
   hidden: {
     opacity: 0,
     y: 10,
-    filter: 'blur(10px)',
+    filter: "blur(10px)",
   },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
+    filter: "blur(0px)",
   },
-}
+};
 
 function Home() {
-  const contactRef = React.useRef<HTMLElement>(null)
+  const contactRef = React.useRef<HTMLElement>(null);
 
   const scrollToContact = () => {
-    contactRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }
+    contactRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
@@ -45,24 +59,26 @@ function Home() {
               transition={{
                 duration: 0.5,
                 delay: 0.5,
-                ease: 'easeOut',
+                ease: "easeOut",
               }}
             >
               <Sparkles className="w-4 h-4" />
-              <span className="text-sm font-medium">Now accepting new clients</span>
+              <span className="text-sm font-medium">
+                Now accepting new clients
+              </span>
             </motion.div>
-            
+
             <TextEffect
               className="text-5xl md:text-7xl font-bold tracking-tight text-foreground"
               preset="fade-in-blur"
               as="h1"
               per="char"
               speedReveal={4}
-              segmentTransition={{ duration: 0.5, ease: 'easeOut' }}
+              segmentTransition={{ duration: 0.5, ease: "easeOut" }}
             >
               Bustamam Technology
             </TextEffect>
-            
+
             <motion.div
               className="text-3xl md:text-5xl lg:text-6xl text-foreground font-bold leading-tight space-y-2 max-w-4xl mx-auto"
               variants={ENTRY_VARIANTS}
@@ -71,18 +87,16 @@ function Home() {
               transition={{
                 duration: 0.5,
                 delay: 0.6,
-                ease: 'easeOut',
+                ease: "easeOut",
               }}
             >
-              <p>
-                Your technical partner in{' '}
-              </p>
+              <p>Your technical partner in </p>
               <p className="inline-flex whitespace-pre-wrap">
                 <TextLoop
                   className="overflow-y-clip"
                   interval={1.5}
                   transition={{
-                    type: 'spring',
+                    type: "spring",
                     stiffness: 900,
                     damping: 80,
                     mass: 10,
@@ -92,19 +106,19 @@ function Home() {
                       y: 20,
                       rotateX: 90,
                       opacity: 0,
-                      filter: 'blur(4px)',
+                      filter: "blur(4px)",
                     },
                     animate: {
                       y: 0,
                       rotateX: 0,
                       opacity: 1,
-                      filter: 'blur(0px)',
+                      filter: "blur(0px)",
                     },
                     exit: {
                       y: -20,
                       rotateX: -90,
                       opacity: 0,
-                      filter: 'blur(4px)',
+                      filter: "blur(4px)",
                     },
                   }}
                 >
@@ -120,7 +134,7 @@ function Home() {
               </p>
               <p>and beyond.</p>
             </motion.div>
-            
+
             <div className="flex flex-wrap gap-4 justify-center">
               <motion.div
                 variants={ENTRY_VARIANTS}
@@ -129,7 +143,7 @@ function Home() {
                 transition={{
                   duration: 0.5,
                   delay: 0.5,
-                  ease: 'easeOut',
+                  ease: "easeOut",
                 }}
               >
                 <Button size="lg" className="group" onClick={scrollToContact}>
@@ -144,7 +158,7 @@ function Home() {
                 transition={{
                   duration: 0.5,
                   delay: 0.6,
-                  ease: 'easeOut',
+                  ease: "easeOut",
                 }}
               >
                 <Link to="/services">
@@ -169,16 +183,16 @@ function Home() {
             transition={{
               duration: 0.5,
               delay: 0.3,
-              ease: 'easeOut',
+              ease: "easeOut",
             }}
             className="text-center space-y-4"
           >
             <div className="inline-block w-16 h-1 bg-primary rounded-full mb-2" />
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              Bustamam Technology is a consulting practice specializing in helping startups 
-              build their technical foundation. We work with founders to turn their vision 
-              into reality, providing full-stack development, technical strategy, and 
-              product development services.
+              Bustamam Technology is a consulting practice specializing in
+              helping startups build their technical foundation. We work with
+              founders to turn their vision into reality, providing full-stack
+              development, technical strategy, and product development services.
             </p>
           </motion.div>
         </div>
@@ -195,27 +209,30 @@ function Home() {
             transition={{
               duration: 0.5,
               delay: 0.3,
-              ease: 'easeOut',
+              ease: "easeOut",
             }}
           >
             How We Help
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { 
-                title: 'Product Development', 
-                description: 'Build your MVP and scale your product with modern, scalable architecture',
-                icon: Rocket
+              {
+                title: "Product Development",
+                description:
+                  "Build your MVP and scale your product with modern, scalable architecture",
+                icon: Rocket,
               },
-              { 
-                title: 'Technical Strategy', 
-                description: 'Architecture decisions, tech stack selection, and technical roadmap planning',
-                icon: Target
+              {
+                title: "Technical Strategy",
+                description:
+                  "Architecture decisions, tech stack selection, and technical roadmap planning",
+                icon: Target,
               },
-              { 
-                title: 'Full-Stack Development', 
-                description: 'End-to-end development from frontend to backend, deployment to production',
-                icon: Code
+              {
+                title: "Full-Stack Development",
+                description:
+                  "End-to-end development from frontend to backend, deployment to production",
+                icon: Code,
               },
             ].map((service, index) => (
               <motion.div
@@ -226,7 +243,7 @@ function Home() {
                 transition={{
                   duration: 0.5,
                   delay: 0.4 + index * 0.1,
-                  ease: 'easeOut',
+                  ease: "easeOut",
                 }}
               >
                 <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2">
@@ -237,7 +254,9 @@ function Home() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground">{service.description}</p>
+                    <p className="text-muted-foreground">
+                      {service.description}
+                    </p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -257,7 +276,7 @@ function Home() {
             transition={{
               duration: 0.5,
               delay: 0.3,
-              ease: 'easeOut',
+              ease: "easeOut",
             }}
           >
             Our Work
@@ -265,44 +284,58 @@ function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               {
-                title: 'SaaS Platform MVP',
-                image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
-                description: 'Built a scalable SaaS platform from concept to launch',
+                title: "SaaS Platform MVP",
+                image:
+                  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+                description:
+                  "Built a scalable SaaS platform from concept to launch",
               },
               {
-                title: 'E-Commerce Solution',
-                image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop',
-                description: 'Full-stack e-commerce platform with modern architecture',
+                title: "E-Commerce Solution",
+                image:
+                  "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
+                description:
+                  "Full-stack e-commerce platform with modern architecture",
               },
               {
-                title: 'Mobile App Launch',
-                image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop',
-                description: 'Cross-platform mobile application for startup',
+                title: "Mobile App Launch",
+                image:
+                  "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop",
+                description: "Cross-platform mobile application for startup",
               },
               {
-                title: 'Tech Stack Migration',
-                image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop',
-                description: 'Modernized legacy system with scalable architecture',
+                title: "Tech Stack Migration",
+                image:
+                  "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop",
+                description:
+                  "Modernized legacy system with scalable architecture",
               },
               {
-                title: 'API Platform',
-                image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop',
-                description: 'Built robust API infrastructure for scaling startup',
+                title: "API Platform",
+                image:
+                  "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop",
+                description:
+                  "Built robust API infrastructure for scaling startup",
               },
               {
-                title: 'Data Analytics Dashboard',
-                image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
-                description: 'Real-time analytics platform for data-driven decisions',
+                title: "Data Analytics Dashboard",
+                image:
+                  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+                description:
+                  "Real-time analytics platform for data-driven decisions",
               },
               {
-                title: 'Cloud Infrastructure',
-                image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop',
-                description: 'Scalable cloud architecture for high-growth startup',
+                title: "Cloud Infrastructure",
+                image:
+                  "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop",
+                description:
+                  "Scalable cloud architecture for high-growth startup",
               },
               {
-                title: 'Product Redesign',
-                image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop',
-                description: 'Complete product redesign and technical overhaul',
+                title: "Product Redesign",
+                image:
+                  "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop",
+                description: "Complete product redesign and technical overhaul",
               },
             ].map((project, index) => (
               <motion.div
@@ -313,7 +346,7 @@ function Home() {
                 transition={{
                   duration: 0.5,
                   delay: 0.4 + index * 0.05,
-                  ease: 'easeOut',
+                  ease: "easeOut",
                 }}
                 className="group relative overflow-hidden rounded-lg aspect-[4/3] cursor-pointer"
               >
@@ -338,7 +371,11 @@ function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" ref={contactRef} className="container mx-auto px-4 py-20">
+      <section
+        id="contact"
+        ref={contactRef}
+        className="container mx-auto px-4 py-20"
+      >
         <div className="max-w-2xl mx-auto text-center">
           <motion.h2
             className="text-3xl md:text-4xl font-bold mb-8"
@@ -348,7 +385,7 @@ function Home() {
             transition={{
               duration: 0.5,
               delay: 0.3,
-              ease: 'easeOut',
+              ease: "easeOut",
             }}
           >
             Let's Connect
@@ -361,10 +398,11 @@ function Home() {
             transition={{
               duration: 0.5,
               delay: 0.4,
-              ease: 'easeOut',
+              ease: "easeOut",
             }}
           >
-            Ready to start your startup? Let's discuss how we can help bring your vision to life.
+            Ready to start your startup? Let's discuss how we can help bring
+            your vision to life.
           </motion.p>
           <div className="flex flex-wrap gap-4 justify-center">
             <motion.div
@@ -374,7 +412,7 @@ function Home() {
               transition={{
                 duration: 0.5,
                 delay: 0.5,
-                ease: 'easeOut',
+                ease: "easeOut",
               }}
             >
               <a href="mailto:admin@bustamam.tech">
@@ -391,10 +429,14 @@ function Home() {
               transition={{
                 duration: 0.5,
                 delay: 0.6,
-                ease: 'easeOut',
+                ease: "easeOut",
               }}
             >
-              <a href="https://github.com/abustamam" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://github.com/abustamam"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Button variant="outline" size="lg" className="group">
                   <Github className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
                   GitHub
@@ -408,10 +450,14 @@ function Home() {
               transition={{
                 duration: 0.5,
                 delay: 0.7,
-                ease: 'easeOut',
+                ease: "easeOut",
               }}
             >
-              <a href="https://linkedin.com/in/rbustamam" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://linkedin.com/in/rbustamam"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Button variant="outline" size="lg" className="group">
                   <Linkedin className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
                   LinkedIn
@@ -432,15 +478,15 @@ function Home() {
             transition={{
               duration: 0.5,
               delay: 0.3,
-              ease: 'easeOut',
+              ease: "easeOut",
             }}
           >
-            © {new Date().getFullYear()} Bustamam Technology. Built with{' '}
-            <span className="text-primary">TanStack Start</span> and{' '}
+            © {new Date().getFullYear()} Bustamam Technology. Built with{" "}
+            <span className="text-primary">TanStack Start</span> and{" "}
             <span className="text-primary">shadcn/ui</span>
           </motion.p>
         </div>
       </footer>
     </div>
-  )
+  );
 }
