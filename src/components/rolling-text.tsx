@@ -28,7 +28,11 @@ export function RollingText({
   const maxWordLength = React.useMemo(() => {
     if (words.length === 0) return 0;
     return Math.max(...words.map((word) => word.length));
-  }, [words]);
+  }, []);
+
+  if (!mounted) {
+    return <span className={className}>{prefix}</span>;
+  }
 
   // Use a larger minWidth based on the longest word, with some padding
   const containerWidth = React.useMemo(() => {
@@ -60,14 +64,6 @@ export function RollingText({
 
   const currentWord = words[displayIndex];
   const nextWord = words[currentIndex];
-
-  if (!mounted) {
-    return (
-      <span className={className}>
-        {prefix} {currentWord}
-      </span>
-    );
-  }
 
   return (
     <span
