@@ -33,7 +33,7 @@ function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20 md:py-32">
+      <section className="container mx-auto px-4 py-12 md:py-20">
         <div className="max-w-4xl mx-auto">
           <div className="text-center space-y-8">
             <motion.div
@@ -113,10 +113,9 @@ function Home() {
       </section>
 
       {/* About Section */}
-      <section className="container mx-auto px-4 py-20">
-        <div className="max-w-4xl mx-auto">
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-8 text-center"
+      <section className="container mx-auto px-4 pt-8 pb-20">
+        <div className="max-w-3xl mx-auto">
+          <motion.div
             variants={ENTRY_VARIANTS}
             initial="hidden"
             animate="visible"
@@ -125,36 +124,18 @@ function Home() {
               delay: 0.3,
               ease: 'easeOut',
             }}
+            className="text-center space-y-4"
           >
-            About Us
-          </motion.h2>
-          <motion.div
-            variants={ENTRY_VARIANTS}
-            initial="hidden"
-            animate="visible"
-            transition={{
-              duration: 0.5,
-              delay: 0.4,
-              ease: 'easeOut',
-            }}
-          >
-            <Card className="border-2 hover:shadow-lg transition-shadow duration-300">
-              <CardHeader>
-                <CardTitle>We Help Startups Start Up</CardTitle>
-                <CardDescription>
-                  Your technical partner from idea to launch and beyond
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground leading-relaxed">
-                  Bustamam Technology is a consulting practice specializing in helping startups 
-                  build their technical foundation. We work with founders to turn their vision 
-                  into reality, providing full-stack development, technical strategy, and 
-                  product development services. From MVP to scale, we're here to help you navigate 
-                  the technical challenges of building a startup.
-                </p>
-              </CardContent>
-            </Card>
+            <div className="inline-block w-16 h-1 bg-primary rounded-full mb-2" />
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+              Bustamam Technology is a consulting practice specializing in helping startups 
+              build their technical foundation. We work with founders to turn their vision 
+              into reality, providing full-stack development, technical strategy, and 
+              product development services.
+            </p>
+            <p className="text-base md:text-lg text-foreground font-medium">
+              Your technical partner from idea to launch and beyond.
+            </p>
           </motion.div>
         </div>
       </section>
