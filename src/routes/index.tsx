@@ -11,6 +11,7 @@ import {
   Sparkles,
   Rocket,
   Target,
+  ChevronDown,
 } from "lucide-react";
 import { motion } from "motion/react";
 import * as React from "react";
@@ -34,103 +35,25 @@ const ENTRY_VARIANTS = {
 
 function Home() {
   const contactRef = React.useRef<HTMLElement>(null);
+  const aboutRef = React.useRef<HTMLElement>(null);
 
   const scrollToContact = () => {
     contactRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const scrollToAbout = () => {
+    aboutRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
       {/* Hero Section */}
-      <section className="container mx-auto px-4 pt-12 md:pt-20">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center space-y-8">
-            <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary border border-primary/20 mb-4"
-              variants={ENTRY_VARIANTS}
-              initial="hidden"
-              animate="visible"
-              transition={{
-                duration: 0.5,
-                delay: 0.5,
-                ease: "easeOut",
-              }}
-            >
-              <Sparkles className="w-4 h-4" />
-              <span className="text-sm font-medium">
-                Now accepting new clients
-              </span>
-            </motion.div>
-
-            <TextEffect
-              className="text-5xl md:text-7xl font-bold tracking-tight text-foreground"
-              preset="fade-in-blur"
-              as="h1"
-              per="char"
-              speedReveal={4}
-              segmentTransition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              Bustamam Technology
-            </TextEffect>
-
-            <motion.div
-              className="text-3xl md:text-5xl lg:text-6xl text-foreground font-bold leading-tight space-y-2 max-w-4xl mx-auto"
-              variants={ENTRY_VARIANTS}
-              initial="hidden"
-              animate="visible"
-              transition={{
-                duration: 0.5,
-                delay: 0.6,
-                ease: "easeOut",
-              }}
-            >
-              <p>Your technical partner in </p>
-              <p className="inline-flex whitespace-pre-wrap">
-                <TextLoop
-                  className="overflow-y-clip"
-                  interval={1.5}
-                  transition={{
-                    type: "spring",
-                    stiffness: 900,
-                    damping: 80,
-                    mass: 10,
-                  }}
-                  variants={{
-                    initial: {
-                      y: 20,
-                      rotateX: 90,
-                      opacity: 0,
-                      filter: "blur(4px)",
-                    },
-                    animate: {
-                      y: 0,
-                      rotateX: 0,
-                      opacity: 1,
-                      filter: "blur(0px)",
-                    },
-                    exit: {
-                      y: -20,
-                      rotateX: -90,
-                      opacity: 0,
-                      filter: "blur(4px)",
-                    },
-                  }}
-                >
-                  <span>launch</span>
-                  <span>scale</span>
-                  <span>success</span>
-                  <span>growth</span>
-                  <span>profitability</span>
-                  <span>market fit</span>
-                  <span>IPO</span>
-                  <span>exit</span>
-                </TextLoop>
-              </p>
-              <p>and beyond.</p>
-            </motion.div>
-
-            <div className="flex flex-wrap gap-4 justify-center">
+      <section className="relative h-[calc(100vh-4rem)] grid grid-rows-[1fr_auto] container mx-auto px-4">
+        <div className="flex items-center justify-center py-4 md:py-8 min-h-0">
+          <div className="max-w-4xl mx-auto w-full">
+            <div className="text-center space-y-6 md:space-y-8">
               <motion.div
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary border border-primary/20 mb-4"
                 variants={ENTRY_VARIANTS}
                 initial="hidden"
                 animate="visible"
@@ -140,12 +63,25 @@ function Home() {
                   ease: "easeOut",
                 }}
               >
-                <Button size="lg" className="group" onClick={scrollToContact}>
-                  <Rocket className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  Start Your Project
-                </Button>
+                <Sparkles className="w-4 h-4" />
+                <span className="text-sm font-medium">
+                  Now accepting new clients
+                </span>
               </motion.div>
+
+              <TextEffect
+                className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight text-foreground"
+                preset="fade-in-blur"
+                as="h1"
+                per="char"
+                speedReveal={4}
+                segmentTransition={{ duration: 0.5, ease: "easeOut" }}
+              >
+                Bustamam Technology
+              </TextEffect>
+
               <motion.div
+                className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-foreground font-bold leading-tight space-y-2 max-w-4xl mx-auto"
                 variants={ENTRY_VARIANTS}
                 initial="hidden"
                 animate="visible"
@@ -155,20 +91,125 @@ function Home() {
                   ease: "easeOut",
                 }}
               >
-                <Link to="/services">
-                  <Button size="lg" variant="outline" className="group">
-                    <Code className="mr-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
-                    Our Services
-                  </Button>
-                </Link>
+                <p>Your technical partner in </p>
+                <p className="inline-flex whitespace-pre-wrap">
+                  <TextLoop
+                    className="overflow-y-clip"
+                    interval={1.5}
+                    transition={{
+                      type: "spring",
+                      stiffness: 900,
+                      damping: 80,
+                      mass: 10,
+                    }}
+                    variants={{
+                      initial: {
+                        y: 20,
+                        rotateX: 90,
+                        opacity: 0,
+                        filter: "blur(4px)",
+                      },
+                      animate: {
+                        y: 0,
+                        rotateX: 0,
+                        opacity: 1,
+                        filter: "blur(0px)",
+                      },
+                      exit: {
+                        y: -20,
+                        rotateX: -90,
+                        opacity: 0,
+                        filter: "blur(4px)",
+                      },
+                    }}
+                  >
+                    <span>launch</span>
+                    <span>scale</span>
+                    <span>success</span>
+                    <span>growth</span>
+                    <span>profitability</span>
+                    <span>market fit</span>
+                    <span>IPO</span>
+                    <span>exit</span>
+                  </TextLoop>
+                </p>
+                <p>and beyond.</p>
               </motion.div>
+
+              <div className="flex flex-wrap gap-4 justify-center pt-2">
+                <motion.div
+                  variants={ENTRY_VARIANTS}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.5,
+                    ease: "easeOut",
+                  }}
+                >
+                  <Button size="lg" className="group" onClick={scrollToContact}>
+                    <Rocket className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    Start Your Project
+                  </Button>
+                </motion.div>
+                <motion.div
+                  variants={ENTRY_VARIANTS}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.6,
+                    ease: "easeOut",
+                  }}
+                >
+                  <Link to="/services">
+                    <Button size="lg" variant="outline" className="group">
+                      <Code className="mr-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
+                      Our Services
+                    </Button>
+                  </Link>
+                </motion.div>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Scroll to next section button */}
+        <motion.div
+          className="flex justify-center pb-4 md:pb-6 flex-shrink-0"
+          variants={ENTRY_VARIANTS}
+          initial="hidden"
+          animate="visible"
+          transition={{
+            duration: 0.5,
+            delay: 0.8,
+            ease: "easeOut",
+          }}
+        >
+          <button
+            onClick={scrollToAbout}
+            className="group flex items-center gap-1.5 px-5 py-3 rounded-full bg-primary/10 hover:bg-primary/20 border-2 border-primary/30 hover:border-primary/60 text-primary font-medium transition-all duration-200 cursor-pointer backdrop-blur-sm"
+            aria-label="Scroll to next section"
+          >
+            <span className="text-xs sm:text-sm">Learn more</span>
+            <motion.div
+              animate={{
+                y: [0, 4, 0],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5" />
+            </motion.div>
+          </button>
+        </motion.div>
       </section>
 
       {/* About Section */}
-      <section className="container mx-auto px-4 pt-8 pb-20">
+      <section ref={aboutRef} className="container mx-auto px-4 pt-8 pb-20">
         <div className="max-w-3xl mx-auto">
           <motion.div
             variants={ENTRY_VARIANTS}
