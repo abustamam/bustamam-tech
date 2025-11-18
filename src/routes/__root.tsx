@@ -16,10 +16,11 @@ import { NotFound } from "~/components/NotFound";
 import appCss from "~/styles/app.css?url";
 import { seo } from "~/utils/seo";
 import { Button } from "~/components/ui/button";
-import { Home as HomeIcon, Code2, Briefcase, FolderKanban } from "lucide-react";
-import { ThemeProvider } from "~/components/theme-provider";
+import { Home as HomeIcon, Briefcase, FolderKanban } from "lucide-react";
+import { ThemeProvider, useTheme } from "~/components/theme-provider";
 import { ThemeToggle } from "~/components/theme-toggle";
 import { AnimatedBackground } from "~/components/ui/animated-background";
+// import { ThemeAwareFavicon } from "~/components/theme-aware-favicon";
 import { cn } from "~/utils/cn";
 
 export const Route = createRootRouteWithContext<{
@@ -102,16 +103,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="antialiased">
+        {/* <ThemeAwareFavicon /> */}
         <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="container mx-auto px-4">
             <div className="flex h-16 items-center justify-between">
-              <Link
-                to="/"
-                className="flex items-center space-x-2 font-bold text-xl hover:text-primary transition-colors"
-              >
-                <Code2 className="h-5 w-5" />
-                <span>Bustamam Tech</span>
-              </Link>
+              <LogoLink />
 
               <NavigationLinks />
 
@@ -134,6 +130,41 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
+  );
+}
+
+function LogoLink() {
+  const { resolvedTheme } = useTheme();
+  const [forceUpdate, setForceUpdate] = React.useState(0);
+
+  // Force re-render on client mount to get correct theme
+  // This runs synchronously before paint to avoid flash
+  React.useLayoutEffect(() => {
+    setForceUpdate((prev) => prev + 1);
+  }, []);
+
+  // Dark theme needs white logo, light theme needs dark logo
+  const logoSrc =
+    resolvedTheme === "dark"
+      ? "/images/bustamam-tech-logo-white.png"
+      : "/images/bustamam-tech-logo-dark.png";
+
+  console.log("resolvedTheme", resolvedTheme);
+  console.log("logoSrc", logoSrc);
+  console.log("forceUpdate", forceUpdate);
+
+  return (
+    <Link
+      to="/"
+      className="flex items-center space-x-2 font-bold text-xl hover:text-primary transition-colors"
+    >
+      <img
+        src={logoSrc}
+        alt="Bustamam Technology"
+        className="h-12 w-auto"
+        key={`${resolvedTheme}-${forceUpdate}`}
+      />
+    </Link>
   );
 }
 

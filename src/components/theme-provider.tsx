@@ -38,6 +38,21 @@ export function ThemeProvider({
     },
   );
 
+  // Sync resolvedTheme with document class on mount to fix SSR hydration mismatch
+  // This runs synchronously before paint to ensure correct initial render
+  const hasSyncedRef = React.useRef(false);
+  React.useLayoutEffect(() => {
+    if (hasSyncedRef.current) return;
+    hasSyncedRef.current = true;
+
+    const htmlClass = document.documentElement.classList;
+    if (htmlClass.contains("dark")) {
+      setResolvedTheme("dark");
+    } else if (htmlClass.contains("light")) {
+      setResolvedTheme("light");
+    }
+  }, []);
+
   React.useEffect(() => {
     const root = window.document.documentElement;
     root.classList.remove("light", "dark");
