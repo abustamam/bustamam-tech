@@ -6,9 +6,28 @@ import {
   DialogTitle,
   DialogClose,
 } from "~/components/ui/dialog";
-import type { ConsultingProject } from "~/data/consulting-projects";
+import type {
+  ConsultingProject,
+  ProjectBadge,
+} from "~/data/consulting-projects";
 import type { EmploymentProject } from "~/data/employment-projects";
-import { Award } from "lucide-react";
+import { Award, Sparkles } from "lucide-react";
+
+const BADGE_CONFIG: Record<
+  ProjectBadge,
+  { label: string; icon: typeof Award; className: string }
+> = {
+  acquired: {
+    label: "Acquired",
+    icon: Award,
+    className: "bg-primary text-primary-foreground",
+  },
+  zeroToOne: {
+    label: "Zero-to-One",
+    icon: Sparkles,
+    className: "bg-primary/90 text-primary-foreground",
+  },
+};
 
 interface ProjectModalProps {
   project?: ConsultingProject | EmploymentProject;
@@ -50,7 +69,11 @@ export function ProjectModal({
                 <img
                   src={project?.image}
                   alt={project?.company}
-                  className="w-24 h-24 rounded-lg object-cover border-2 border-border"
+                  className={`w-24 h-24 rounded-lg object-contain border-2 border-border p-2 ${
+                    consultingProject?.darkLogo || employmentProject?.darkLogo
+                      ? "bg-[hsl(222.2,84%,4.9%)]"
+                      : "bg-white"
+                  }`}
                 />
               </div>
             )}
@@ -59,12 +82,27 @@ export function ProjectModal({
                 <DialogTitle className="text-3xl font-bold text-foreground">
                   {displayName}
                 </DialogTitle>
-                {isConsulting && consultingProject?.acquired && (
-                  <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-primary text-primary-foreground text-xs font-semibold">
-                    <Award className="w-3.5 h-3.5" />
-                    <span>Acquired</span>
-                  </div>
-                )}
+                {isConsulting &&
+                  consultingProject?.badges &&
+                  consultingProject.badges.length > 0 &&
+                  (() => {
+                    // Show the first badge (prioritize "acquired" if both exist)
+                    const badgeType = consultingProject.badges.includes(
+                      "acquired",
+                    )
+                      ? "acquired"
+                      : consultingProject.badges[0];
+                    const config = BADGE_CONFIG[badgeType];
+                    const Icon = config.icon;
+                    return (
+                      <div
+                        className={`flex items-center gap-1.5 px-2 py-1 rounded ${config.className} text-xs font-semibold`}
+                      >
+                        <Icon className="w-3.5 h-3.5" />
+                        <span>{config.label}</span>
+                      </div>
+                    );
+                  })()}
               </div>
               <p className="text-lg font-semibold text-primary mt-2">
                 {project?.role}

@@ -1,3 +1,5 @@
+export type ProjectBadge = "acquired" | "zeroToOne";
+
 export interface ConsultingProject {
   company: string;
   projectName?: string;
@@ -6,11 +8,24 @@ export interface ConsultingProject {
   description: string;
   skills: string[];
   image?: string;
-  acquired?: boolean;
+  badges?: ProjectBadge[];
   companyMission?: string;
+  darkLogo?: boolean;
 }
 
 export const consultingProjects: ConsultingProject[] = [
+  {
+    company: "Nuema",
+    role: "Software Engineer",
+    period: "2025",
+    description:
+      "Built several MVPs for a company focused on building communities of families. Developed full-stack applications using modern technologies to enable community engagement and family connections.",
+    skills: ["Expo", "Prisma", "tRPC", "AWS", "Serverless", "React Native"],
+    companyMission:
+      "NUEMA is a digital village where parents find authentic connections and trusted wellness resources.",
+    image: "/images/projects/logos/nuema-logo.svg",
+    darkLogo: true,
+  },
   {
     company: "Breezy",
     role: "Senior Software Engineer",
@@ -18,7 +33,7 @@ export const consultingProjects: ConsultingProject[] = [
     description:
       "HVAC Management SaaS. Implemented new features such as drip-notifications for maintenance plan management, increasing revenue for customers. Built custom solutions for clients such as configurable dashboards.",
     skills: ["Hasura", "React", "Metabase", "tRPC"],
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop",
+    image: "/images/projects/logos/breezy-logo.png",
   },
   {
     company: "Milken Institute",
@@ -28,7 +43,7 @@ export const consultingProjects: ConsultingProject[] = [
     description:
       "Architected a redesign and implemented new features like file management and budget management for the Community Infrastructure Center platform.",
     skills: ["React", "Prisma", "ExpressJS"],
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=400&fit=crop",
+    image: "/images/projects/logos/cic-logo.svg",
   },
   {
     company: "Edvo",
@@ -46,16 +61,18 @@ export const consultingProjects: ConsultingProject[] = [
       "Browser Extensions",
       "Graph Data Models",
     ],
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=400&fit=crop",
+    image: "/images/projects/logos/edvo-logo.jpeg",
+    badges: ["zeroToOne"],
   },
   {
-    company: "Adaptiv App",
+    company: "DoTerra",
+    projectName: "Adaptiv App",
     role: "Software Engineer",
     period: "2020",
     description:
       "A mindfulness app that allowed users to meditate, journal, and track their emotions throughout the day using wearables. Built the mobile application with React Native and integrated Firebase for real-time data synchronization.",
     skills: ["React Native", "Firebase"],
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=400&fit=crop",
+    image: "/images/projects/logos/adaptiv-logo.png",
   },
   {
     company: "Plutora",
@@ -64,16 +81,17 @@ export const consultingProjects: ConsultingProject[] = [
     description:
       "Value stream management SaaS platform. Redesigned the application to adhere to brand guidelines and improve scalability, working with ExtJS and migrating components to React.",
     skills: ["ExtJS", "CSS", "React"],
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=400&fit=crop",
+    image: "/images/projects/logos/plutora-logo.jpeg",
   },
   {
-    company: "Preguntale a Maria",
+    company: "FYC Labs",
+    projectName: "Preguntale a Maria",
     role: "Mobile Developer",
     period: "2019",
     description:
       "A mobile app for managing communications with houseworkers. Built the cross-platform mobile application using Expo and React Native, enabling seamless communication workflows.",
     skills: ["Expo", "React Native"],
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop",
+    image: "/images/projects/logos/fyc-logo.svg",
   },
   {
     company: "LayerOne",
@@ -82,8 +100,23 @@ export const consultingProjects: ConsultingProject[] = [
     description:
       "A web3 application designed to allow users to buy virtual land using smart contracts. Built the user interface and integrated Web3 functionality for blockchain transactions.",
     skills: ["React", "CSS", "Web3"],
-    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=400&fit=crop",
-    acquired: true,
+    image: "/images/projects/logos/xyo-logo.svg",
+    badges: ["acquired"],
+  },
+  {
+    company: "Udacity",
+    role: "Code Reviewer / Front-End Nanodegree Guide",
+    period: "Jul 2015 - Apr 2019 · 3 yrs 10 mos",
+    description:
+      "Reviewed student project submissions for Udacity's Front-End Nanodegree program, performing thorough code reviews and project evaluations while providing actionable and helpful feedback. As a Front-End Nanodegree Guide, provided technical/coding support and motivation to teams of 7-10 students, guiding them through common pitfalls and ensuring accountability to deadlines. Languages reviewed: Knockout.js, Javascript, HTML, CSS.",
+    skills: [
+      "Knockout.js",
+      "Javascript",
+      "HTML",
+      "CSS",
+      "Code Review",
+      "Mentoring",
+    ],
+    image: "/images/projects/logos/udacity.svg",
   },
 ];
-
