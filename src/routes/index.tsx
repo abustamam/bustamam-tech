@@ -3,6 +3,10 @@ import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { TextEffect } from "~/components/ui/text-effect";
 import { TextLoop } from "~/components/ui/text-loop";
+import { ProjectCard } from "~/components/project-card";
+import { ProjectModal } from "~/components/project-modal";
+import { consultingProjects } from "~/data/consulting-projects";
+import { employmentProjects } from "~/data/employment-projects";
 import {
   Github,
   Linkedin,
@@ -12,6 +16,7 @@ import {
   Rocket,
   Target,
   ChevronDown,
+  Briefcase,
 } from "lucide-react";
 import { motion } from "motion/react";
 import * as React from "react";
@@ -36,6 +41,10 @@ const ENTRY_VARIANTS = {
 function Home() {
   const contactRef = React.useRef<HTMLElement>(null);
   const aboutRef = React.useRef<HTMLElement>(null);
+  const [selectedProject, setSelectedProject] = React.useState<{
+    project?: (typeof consultingProjects)[0] | (typeof employmentProjects)[0];
+    type?: "consulting" | "employment";
+  } | null>(null);
 
   const scrollToContact = () => {
     contactRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -44,6 +53,20 @@ function Home() {
   const scrollToAbout = () => {
     aboutRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
+  // Get featured projects (most recent 3 consulting + 3 employment)
+  const featuredConsulting = consultingProjects.slice(0, 3);
+  const featuredEmployment = employmentProjects.slice(0, 3);
+  const featuredProjects = [
+    ...featuredConsulting.map((p) => ({
+      project: p,
+      type: "consulting" as const,
+    })),
+    ...featuredEmployment.map((p) => ({
+      project: p,
+      type: "employment" as const,
+    })),
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
@@ -297,14 +320,32 @@ function Home() {
               </motion.div>
             ))}
           </div>
+          <motion.div
+            className="flex justify-center mt-12"
+            variants={ENTRY_VARIANTS}
+            initial="hidden"
+            animate="visible"
+            transition={{
+              duration: 0.5,
+              delay: 0.7,
+              ease: "easeOut",
+            }}
+          >
+            <Link to="/work">
+              <Button size="lg" variant="outline" className="group">
+                <Briefcase className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
+                View My Work
+              </Button>
+            </Link>
+          </motion.div>
         </div>
       </section>
 
-      {/* Our Work Section */}
+      {/* Featured Projects Section */}
       <section className="container mx-auto px-4 py-20">
         <div className="max-w-7xl mx-auto">
           <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-12 text-center"
+            className="text-3xl md:text-4xl font-bold mb-4 text-center"
             variants={ENTRY_VARIANTS}
             initial="hidden"
             animate="visible"
@@ -314,96 +355,65 @@ function Home() {
               ease: "easeOut",
             }}
           >
-            Our Work
+            Featured Projects
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              {
-                title: "SaaS Platform MVP",
-                image:
-                  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-                description:
-                  "Built a scalable SaaS platform from concept to launch",
-              },
-              {
-                title: "E-Commerce Solution",
-                image:
-                  "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
-                description:
-                  "Full-stack e-commerce platform with modern architecture",
-              },
-              {
-                title: "Mobile App Launch",
-                image:
-                  "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop",
-                description: "Cross-platform mobile application for startup",
-              },
-              {
-                title: "Tech Stack Migration",
-                image:
-                  "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop",
-                description:
-                  "Modernized legacy system with scalable architecture",
-              },
-              {
-                title: "API Platform",
-                image:
-                  "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop",
-                description:
-                  "Built robust API infrastructure for scaling startup",
-              },
-              {
-                title: "Data Analytics Dashboard",
-                image:
-                  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-                description:
-                  "Real-time analytics platform for data-driven decisions",
-              },
-              {
-                title: "Cloud Infrastructure",
-                image:
-                  "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop",
-                description:
-                  "Scalable cloud architecture for high-growth startup",
-              },
-              {
-                title: "Product Redesign",
-                image:
-                  "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop",
-                description: "Complete product redesign and technical overhaul",
-              },
-            ].map((project, index) => (
-              <motion.div
-                key={project.title}
-                variants={ENTRY_VARIANTS}
-                initial="hidden"
-                animate="visible"
-                transition={{
-                  duration: 0.5,
-                  delay: 0.4 + index * 0.05,
-                  ease: "easeOut",
-                }}
-                className="group relative overflow-hidden rounded-lg aspect-[4/3] cursor-pointer"
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 z-20 flex flex-col justify-end p-6">
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-white/80 opacity-0 group-hover:opacity-100 transition-opacity">
-                    {project.description}
-                  </p>
-                </div>
-              </motion.div>
+          <motion.p
+            className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto"
+            variants={ENTRY_VARIANTS}
+            initial="hidden"
+            animate="visible"
+            transition={{
+              duration: 0.5,
+              delay: 0.4,
+              ease: "easeOut",
+            }}
+          >
+            A selection of recent consulting projects and employment
+            experiences. Click on any project to learn more.
+          </motion.p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {featuredProjects.map((item, index) => (
+              <ProjectCard
+                key={`${item.type}-${index}`}
+                project={item.project}
+                type={item.type}
+                onClick={() => setSelectedProject(item)}
+                index={index}
+              />
             ))}
           </div>
+          <motion.div
+            className="flex justify-center"
+            variants={ENTRY_VARIANTS}
+            initial="hidden"
+            animate="visible"
+            transition={{
+              duration: 0.5,
+              delay: 0.8,
+              ease: "easeOut",
+            }}
+          >
+            <Link to="/work">
+              <Button size="lg" variant="outline" className="group">
+                <Briefcase className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
+                View All Projects
+              </Button>
+            </Link>
+          </motion.div>
         </div>
       </section>
+
+      {/* Project Modal */}
+      <ProjectModal
+        project={selectedProject?.project}
+        type={selectedProject?.type}
+        open={!!selectedProject}
+        onOpenChange={(open) => {
+          if (!open) {
+            setSelectedProject(null);
+          }
+        }}
+      />
 
       {/* Contact Section */}
       <section

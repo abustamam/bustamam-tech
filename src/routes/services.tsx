@@ -12,9 +12,14 @@ import {
   Target,
   Code,
   Zap,
-  Shield,
   TrendingUp,
   ArrowRight,
+  Smartphone,
+  Workflow,
+  Database,
+  Users,
+  Webhook,
+  Sparkles,
 } from "lucide-react";
 
 export const Route = createFileRoute("/services")({
@@ -43,7 +48,8 @@ function Services() {
             className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto animate-slide-up"
             style={{ animationDelay: "0.2s" }}
           >
-            Comprehensive technical solutions to help your startup succeed
+            Full-stack development, automation, and technical leadership to help
+            your startup succeed
           </p>
         </div>
       </section>
@@ -54,75 +60,123 @@ function Services() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                title: "Product Development",
+                title: "AI & LLM Integration",
                 description:
-                  "Build your MVP and scale your product with modern, scalable architecture. From concept to launch, we handle the full development lifecycle.",
-                icon: Rocket,
+                  "Integrate AI and LLM-powered workflows into your applications. Experience building automated data enrichment processes, intelligent workflows, and AI-enhanced features that streamline operations and boost productivity.",
+                icon: Sparkles,
                 features: [
-                  "MVP Development",
-                  "Scalable Architecture",
-                  "Modern Tech Stack",
-                  "Agile Methodology",
-                ],
-              },
-              {
-                title: "Technical Strategy",
-                description:
-                  "Architecture decisions, tech stack selection, and technical roadmap planning. Make informed decisions that set your startup up for success.",
-                icon: Target,
-                features: [
-                  "Architecture Design",
-                  "Tech Stack Selection",
-                  "Roadmap Planning",
-                  "Technical Consulting",
+                  "LLM-Powered Workflows",
+                  "Data Enrichment Automation",
+                  "AI-Enhanced Features",
+                  "Intelligent Process Automation",
                 ],
               },
               {
                 title: "Full-Stack Development",
                 description:
-                  "End-to-end development from frontend to backend, deployment to production. We build complete solutions that work seamlessly together.",
+                  "End-to-end development from React/Remix frontends to Node.js/Express backends. Experience with React Native, TypeScript, and modern frameworks to build scalable applications.",
                 icon: Code,
                 features: [
-                  "Frontend Development",
-                  "Backend Development",
-                  "API Design",
-                  "DevOps & Deployment",
+                  "React & React Native",
+                  "Node.js & Express",
+                  "TypeScript",
+                  "Remix & Modern Frameworks",
                 ],
               },
               {
-                title: "Performance Optimization",
+                title: "Mobile App Development",
                 description:
-                  "Speed up your application and improve user experience. We identify bottlenecks and optimize for scale.",
+                  "Cross-platform mobile applications using React Native and Expo. From MVP to production, build native-feeling apps that work on iOS and Android.",
+                icon: Smartphone,
+                features: [
+                  "React Native & Expo",
+                  "Cross-Platform Apps",
+                  "Native Integrations",
+                  "App Store Deployment",
+                ],
+              },
+              {
+                title: "Workflow Automation",
+                description:
+                  "Automate complex business processes with Temporal, XState, and custom workflows. LLM-powered automation, web scraping with Playwright/Puppeteer, and process optimization.",
+                icon: Workflow,
+                features: [
+                  "Temporal & XState",
+                  "LLM-Powered Workflows",
+                  "Web Automation (Playwright/Puppeteer)",
+                  "Process Optimization",
+                ],
+              },
+              {
+                title: "Real-Time Systems",
+                description:
+                  "Build real-time collaborative applications with Firestore, WebSockets, and graph-based data models. Enable live updates and seamless user experiences.",
+                icon: Database,
+                features: [
+                  "Firestore & Real-time DB",
+                  "Graph Data Models",
+                  "Real-time Collaboration",
+                  "Live Data Synchronization",
+                ],
+              },
+              {
+                title: "Third-Party Integrations",
+                description:
+                  "Seamlessly integrate with services like Twilio, SendGrid, Stripe, Retool, and Metabase. Build custom dashboards and connect your app to the tools you need.",
+                icon: Webhook,
+                features: [
+                  "Payment Processing (Stripe)",
+                  "Communication APIs (Twilio, SendGrid)",
+                  "Business Intelligence (Metabase)",
+                  "Custom Dashboard Development",
+                ],
+              },
+              {
+                title: "Technical Leadership",
+                description:
+                  "Team leadership, mentoring, and project management. Experience leading teams of 6+ engineers, establishing team culture, and delivering high-quality solutions on time.",
+                icon: Users,
+                features: [
+                  "Team Leadership",
+                  "Mentoring & Code Reviews",
+                  "Project Management",
+                  "Technical Architecture",
+                ],
+              },
+              {
+                title: "Web3 & Blockchain",
+                description:
+                  "Blockchain integration, smart contracts, and Web3 applications. Experience building location-based NFT games and integrating blockchain technology into user-facing apps.",
                 icon: Zap,
                 features: [
-                  "Performance Audits",
-                  "Code Optimization",
-                  "Database Tuning",
-                  "Caching Strategies",
+                  "Smart Contracts (Solidity)",
+                  "Web3 Integration",
+                  "Blockchain UX",
+                  "NFT & Token Systems",
                 ],
               },
               {
-                title: "Security & Compliance",
+                title: "Legacy Modernization",
                 description:
-                  "Protect your startup with robust security practices and compliance standards. Keep your data and users safe.",
-                icon: Shield,
-                features: [
-                  "Security Audits",
-                  "Compliance Guidance",
-                  "Best Practices",
-                  "Threat Mitigation",
-                ],
-              },
-              {
-                title: "Scaling & Growth",
-                description:
-                  "Scale your infrastructure and team as you grow. We help you prepare for success and handle increased demand.",
+                  "Modernize legacy systems and migrate to modern tech stacks. Experience migrating ExtJS to React, improving scalability, and maintaining brand guidelines during transitions.",
                 icon: TrendingUp,
                 features: [
-                  "Infrastructure Scaling",
-                  "Team Scaling",
-                  "Process Optimization",
-                  "Growth Strategy",
+                  "Legacy System Migration",
+                  "Tech Stack Modernization",
+                  "Scalability Improvements",
+                  "Brand-Compliant Redesigns",
+                ],
+              },
+              {
+                title: "Data Visualization & Dashboards",
+                description:
+                  "Build interactive dashboards, data visualization tools, and custom analytics interfaces. Experience with Leaflet, GSAP, Metabase, and custom visualization frameworks.",
+                icon: Target,
+                features: [
+                  "Custom Dashboards",
+                  "Data Visualization",
+                  "Interactive Maps (Leaflet)",
+                  "Analytics Interfaces",
                 ],
               },
             ].map((service, index) => (

@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WorkRouteImport } from './routes/work'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as RedirectRouteImport } from './routes/redirect'
 import { Route as ProjectsRouteImport } from './routes/projects'
@@ -28,6 +29,11 @@ import { Route as ApiUsersIdRouteImport } from './routes/api/users.$id'
 import { Route as PathlessLayoutNestedLayoutRouteBRouteImport } from './routes/_pathlessLayout/_nested-layout/route-b'
 import { Route as PathlessLayoutNestedLayoutRouteARouteImport } from './routes/_pathlessLayout/_nested-layout/route-a'
 
+const WorkRoute = WorkRouteImport.update({
+  id: '/work',
+  path: '/work',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
@@ -128,6 +134,7 @@ export interface FileRoutesByFullPath {
   '/projects': typeof ProjectsRoute
   '/redirect': typeof RedirectRoute
   '/services': typeof ServicesRoute
+  '/work': typeof WorkRoute
   '/api/users': typeof ApiUsersRouteWithChildren
   '/posts/$postId': typeof PostsPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
@@ -144,6 +151,7 @@ export interface FileRoutesByTo {
   '/projects': typeof ProjectsRoute
   '/redirect': typeof RedirectRoute
   '/services': typeof ServicesRoute
+  '/work': typeof WorkRoute
   '/api/users': typeof ApiUsersRouteWithChildren
   '/posts/$postId': typeof PostsPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
@@ -164,6 +172,7 @@ export interface FileRoutesById {
   '/projects': typeof ProjectsRoute
   '/redirect': typeof RedirectRoute
   '/services': typeof ServicesRoute
+  '/work': typeof WorkRoute
   '/_pathlessLayout/_nested-layout': typeof PathlessLayoutNestedLayoutRouteWithChildren
   '/api/users': typeof ApiUsersRouteWithChildren
   '/posts/$postId': typeof PostsPostIdRoute
@@ -185,6 +194,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/redirect'
     | '/services'
+    | '/work'
     | '/api/users'
     | '/posts/$postId'
     | '/users/$userId'
@@ -201,6 +211,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/redirect'
     | '/services'
+    | '/work'
     | '/api/users'
     | '/posts/$postId'
     | '/users/$userId'
@@ -220,6 +231,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/redirect'
     | '/services'
+    | '/work'
     | '/_pathlessLayout/_nested-layout'
     | '/api/users'
     | '/posts/$postId'
@@ -241,12 +253,20 @@ export interface RootRouteChildren {
   ProjectsRoute: typeof ProjectsRoute
   RedirectRoute: typeof RedirectRoute
   ServicesRoute: typeof ServicesRoute
+  WorkRoute: typeof WorkRoute
   ApiUsersRoute: typeof ApiUsersRouteWithChildren
   PostsPostIdDeepRoute: typeof PostsPostIdDeepRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/work': {
+      id: '/work'
+      path: '/work'
+      fullPath: '/work'
+      preLoaderRoute: typeof WorkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
@@ -455,6 +475,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectsRoute: ProjectsRoute,
   RedirectRoute: RedirectRoute,
   ServicesRoute: ServicesRoute,
+  WorkRoute: WorkRoute,
   ApiUsersRoute: ApiUsersRouteWithChildren,
   PostsPostIdDeepRoute: PostsPostIdDeepRoute,
 }

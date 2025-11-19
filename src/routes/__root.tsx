@@ -16,7 +16,7 @@ import { NotFound } from "~/components/NotFound";
 import appCss from "~/styles/app.css?url";
 import { seo } from "~/utils/seo";
 import { Button } from "~/components/ui/button";
-import { Home as HomeIcon, Briefcase, FolderKanban } from "lucide-react";
+import { Home as HomeIcon, Briefcase, Code2 } from "lucide-react";
 import { ThemeProvider, useTheme } from "~/components/theme-provider";
 import { ThemeToggle } from "~/components/theme-toggle";
 import { AnimatedBackground } from "~/components/ui/animated-background";
@@ -176,7 +176,7 @@ function NavigationLinks() {
   const getActiveId = () => {
     if (currentPath === "/") return "home";
     if (currentPath === "/services") return "services";
-    if (currentPath === "/projects") return "projects";
+    if (currentPath === "/work") return "work";
     return null;
   };
 
@@ -198,10 +198,10 @@ function NavigationLinks() {
       exact: false,
     },
     {
-      id: "projects",
-      to: "/projects",
-      icon: FolderKanban,
-      label: "Projects",
+      id: "work",
+      to: "/work",
+      icon: Code2,
+      label: "My Work",
       exact: false,
     },
   ];
