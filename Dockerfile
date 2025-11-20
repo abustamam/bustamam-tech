@@ -24,7 +24,7 @@ WORKDIR /app
 COPY package.json bun.lockb* ./
 
 # Install all dependencies (vite is needed for vite start in production)
-RUN bun install --frozen-lockfile --production=false
+RUN bun install --frozen-lockfile
 
 # Copy built application from builder
 COPY --from=builder /app/dist ./dist
