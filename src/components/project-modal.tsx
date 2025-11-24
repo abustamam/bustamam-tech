@@ -82,16 +82,20 @@ export function ProjectModal({
                 <DialogTitle className="text-3xl font-bold text-foreground">
                   {displayName}
                 </DialogTitle>
-                {isConsulting &&
+                {((isConsulting &&
                   consultingProject?.badges &&
-                  consultingProject.badges.length > 0 &&
+                  consultingProject.badges.length > 0) ||
+                  (!isConsulting &&
+                    employmentProject?.badges &&
+                    employmentProject.badges.length > 0)) &&
                   (() => {
                     // Show the first badge (prioritize "acquired" if both exist)
-                    const badgeType = consultingProject.badges.includes(
-                      "acquired",
-                    )
+                    const badges = isConsulting
+                      ? consultingProject?.badges || []
+                      : employmentProject?.badges || [];
+                    const badgeType = badges.includes("acquired")
                       ? "acquired"
-                      : consultingProject.badges[0];
+                      : badges[0];
                     const config = BADGE_CONFIG[badgeType];
                     const Icon = config.icon;
                     return (

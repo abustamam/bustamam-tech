@@ -8,6 +8,8 @@ import { nitro } from "nitro/vite";
 export default defineConfig({
   server: {
     port: 3000,
+    host: true, // Explicitly bind to all interfaces
+    strictPort: false, // Allow port fallback if 3000 is busy
   },
   plugins: [
     tsConfigPaths({

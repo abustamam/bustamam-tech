@@ -19,7 +19,7 @@ export function EmploymentProjectCard({
       variant="full"
       index={index}
       animationDelay={animationDelay}
-      showBadges={false}
+      showBadges={true}
       showLocation={true}
       showCompanyMission={true}
       showAdditionalRoles={true}
@@ -27,4 +27,3 @@ export function EmploymentProjectCard({
     />
   );
 }
-

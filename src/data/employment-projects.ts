@@ -1,3 +1,5 @@
+import type { ProjectBadge } from "./consulting-projects";
+
 export interface AdditionalRole {
   role: string;
   period: string;
@@ -15,6 +17,7 @@ export interface EmploymentProject {
   additionalRoles?: AdditionalRole[];
   image?: string;
   darkLogo?: boolean;
+  badges?: ProjectBadge[];
 }
 
 export const employmentProjects: EmploymentProject[] = [
@@ -31,12 +34,23 @@ export const employmentProjects: EmploymentProject[] = [
   {
     company: "CDK Global",
     role: "Senior Software Engineer",
-    period: "Sep 2021 - Jul 2023 · 1 yr 11 mos",
+    period: "Jan 2022 - Jul 2023 · 1 yr 11 mos",
     location: "Remote",
     description:
       "Developed a dynamic insurance quoting platform, integrating Puppeteer for form automation and Stripe for secure payments, ensuring PCI compliance. Promoted to Staff Engineer post-acquisition; led web automation efforts and mentored team members on best practices, contributing to company-wide scaling initiatives.",
     skills: ["puppeteer", "Team Leadership", "React Native", "TypeScript"],
     image: "/images/projects/logos/cdk-logo.jpg",
+  },
+  {
+    company: "Salty",
+    role: "Front-End Engineer",
+    period: "Sep 2021 - Jan 2022",
+    location: "Remote",
+    description:
+      "Contributed to front-end development efforts, building user interfaces and implementing features for the platform. Acquired by CDK Global in Oct 2021.",
+    skills: ["React", "TypeScript", "Chrome Extensions"],
+    badges: ["acquired"],
+    image: "/images/projects/logos/salty-logo.jpeg",
   },
   {
     company: "FullStack Labs",
@@ -83,5 +97,6 @@ export const employmentProjects: EmploymentProject[] = [
       "Data Visualization",
     ],
     image: "/images/projects/logos/conarrative-logo.png",
+    badges: ["acquired"],
   },
 ];

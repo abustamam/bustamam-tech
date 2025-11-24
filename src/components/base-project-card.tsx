@@ -96,18 +96,24 @@ export function BaseProjectCard({
   const cardContent = (
     <>
       {showBadges &&
-        isConsulting &&
-        consultingProject?.badges &&
-        consultingProject.badges.length > 0 && (
+        ((isConsulting &&
+          consultingProject?.badges &&
+          consultingProject.badges.length > 0) ||
+          (!isConsulting &&
+            employmentProject?.badges &&
+            employmentProject.badges.length > 0)) && (
           <div
             className={`absolute top-0 right-0 z-10 overflow-hidden ${
               isCompact ? "w-20 h-20" : "w-24 h-24"
             }`}
           >
             {(() => {
-              const badgeType = consultingProject.badges.includes("acquired")
+              const badges = isConsulting
+                ? consultingProject?.badges || []
+                : employmentProject?.badges || [];
+              const badgeType = badges.includes("acquired")
                 ? "acquired"
-                : consultingProject.badges[0];
+                : badges[0];
               const config = BADGE_CONFIG[badgeType];
               const Icon = config.icon;
               return (
