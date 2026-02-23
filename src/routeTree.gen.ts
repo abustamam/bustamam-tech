@@ -22,7 +22,9 @@ import { Route as UsersIndexRouteImport } from './routes/users.index'
 import { Route as PostsIndexRouteImport } from './routes/posts.index'
 import { Route as UsersUserIdRouteImport } from './routes/users.$userId'
 import { Route as PostsPostIdRouteImport } from './routes/posts.$postId'
+import { Route as ApiWhoamiRouteImport } from './routes/api/whoami'
 import { Route as ApiUsersRouteImport } from './routes/api/users'
+import { Route as ApiHealthzRouteImport } from './routes/api/healthz'
 import { Route as PathlessLayoutNestedLayoutRouteImport } from './routes/_pathlessLayout/_nested-layout'
 import { Route as PostsPostIdDeepRouteImport } from './routes/posts_.$postId.deep'
 import { Route as ApiUsersIdRouteImport } from './routes/api/users.$id'
@@ -93,9 +95,19 @@ const PostsPostIdRoute = PostsPostIdRouteImport.update({
   path: '/$postId',
   getParentRoute: () => PostsRouteRoute,
 } as any)
+const ApiWhoamiRoute = ApiWhoamiRouteImport.update({
+  id: '/api/whoami',
+  path: '/api/whoami',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiUsersRoute = ApiUsersRouteImport.update({
   id: '/api/users',
   path: '/api/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiHealthzRoute = ApiHealthzRouteImport.update({
+  id: '/api/healthz',
+  path: '/api/healthz',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PathlessLayoutNestedLayoutRoute =
@@ -135,7 +147,9 @@ export interface FileRoutesByFullPath {
   '/redirect': typeof RedirectRoute
   '/services': typeof ServicesRoute
   '/work': typeof WorkRoute
+  '/api/healthz': typeof ApiHealthzRoute
   '/api/users': typeof ApiUsersRouteWithChildren
+  '/api/whoami': typeof ApiWhoamiRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
   '/posts/': typeof PostsIndexRoute
@@ -152,7 +166,9 @@ export interface FileRoutesByTo {
   '/redirect': typeof RedirectRoute
   '/services': typeof ServicesRoute
   '/work': typeof WorkRoute
+  '/api/healthz': typeof ApiHealthzRoute
   '/api/users': typeof ApiUsersRouteWithChildren
+  '/api/whoami': typeof ApiWhoamiRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
   '/posts': typeof PostsIndexRoute
@@ -174,7 +190,9 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/work': typeof WorkRoute
   '/_pathlessLayout/_nested-layout': typeof PathlessLayoutNestedLayoutRouteWithChildren
+  '/api/healthz': typeof ApiHealthzRoute
   '/api/users': typeof ApiUsersRouteWithChildren
+  '/api/whoami': typeof ApiWhoamiRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
   '/posts/': typeof PostsIndexRoute
@@ -195,7 +213,9 @@ export interface FileRouteTypes {
     | '/redirect'
     | '/services'
     | '/work'
+    | '/api/healthz'
     | '/api/users'
+    | '/api/whoami'
     | '/posts/$postId'
     | '/users/$userId'
     | '/posts/'
@@ -212,7 +232,9 @@ export interface FileRouteTypes {
     | '/redirect'
     | '/services'
     | '/work'
+    | '/api/healthz'
     | '/api/users'
+    | '/api/whoami'
     | '/posts/$postId'
     | '/users/$userId'
     | '/posts'
@@ -233,7 +255,9 @@ export interface FileRouteTypes {
     | '/services'
     | '/work'
     | '/_pathlessLayout/_nested-layout'
+    | '/api/healthz'
     | '/api/users'
+    | '/api/whoami'
     | '/posts/$postId'
     | '/users/$userId'
     | '/posts/'
@@ -254,7 +278,9 @@ export interface RootRouteChildren {
   RedirectRoute: typeof RedirectRoute
   ServicesRoute: typeof ServicesRoute
   WorkRoute: typeof WorkRoute
+  ApiHealthzRoute: typeof ApiHealthzRoute
   ApiUsersRoute: typeof ApiUsersRouteWithChildren
+  ApiWhoamiRoute: typeof ApiWhoamiRoute
   PostsPostIdDeepRoute: typeof PostsPostIdDeepRoute
 }
 
@@ -351,11 +377,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PostsPostIdRouteImport
       parentRoute: typeof PostsRouteRoute
     }
+    '/api/whoami': {
+      id: '/api/whoami'
+      path: '/api/whoami'
+      fullPath: '/api/whoami'
+      preLoaderRoute: typeof ApiWhoamiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/users': {
       id: '/api/users'
       path: '/api/users'
       fullPath: '/api/users'
       preLoaderRoute: typeof ApiUsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/healthz': {
+      id: '/api/healthz'
+      path: '/api/healthz'
+      fullPath: '/api/healthz'
+      preLoaderRoute: typeof ApiHealthzRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_pathlessLayout/_nested-layout': {
@@ -476,7 +516,9 @@ const rootRouteChildren: RootRouteChildren = {
   RedirectRoute: RedirectRoute,
   ServicesRoute: ServicesRoute,
   WorkRoute: WorkRoute,
+  ApiHealthzRoute: ApiHealthzRoute,
   ApiUsersRoute: ApiUsersRouteWithChildren,
+  ApiWhoamiRoute: ApiWhoamiRoute,
   PostsPostIdDeepRoute: PostsPostIdDeepRoute,
 }
 export const routeTree = rootRouteImport
