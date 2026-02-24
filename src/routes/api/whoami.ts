@@ -1,13 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { json } from "@tanstack/react-start";
-import { hostname } from "node:os";
 
 function getServerId(): string {
   return (
-    process.env.SERVER_ID ??
-    process.env.INSTANCE_ID ??
-    process.env.HOSTNAME ??
-    hostname()
+    process.env.SERVER_ID ?? 'unknown'
   );
 }
 
@@ -19,7 +15,8 @@ export const Route = createFileRoute("/api/whoami")({
         return json({
           message: `hello from server ${serverId}`,
           serverId,
-          hostname: process.env.HOSTNAME ?? hostname(),
+          pid: process.pid,
+          time: new Date().toISOString(),
         });
       },
     },
